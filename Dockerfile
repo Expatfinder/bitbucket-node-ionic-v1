@@ -14,7 +14,8 @@ RUN apt-get update &&  \
     yum install -y gcc-c++ make  && \
     curl -sL https://rpm.nodesource.com/setup_10.x | -E bash -  && \
     yum install nodejs
-    npm install -g ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
+    npm install -g cordova ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
+    npm i -D @ionic/v1-toolkit && \
     npm cache clear && \
     mkdir Sources && \
     mkdir -p /root/.cache/yarn/ && \
