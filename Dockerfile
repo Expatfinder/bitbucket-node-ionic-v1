@@ -1,21 +1,12 @@
 FROM centos:7
 
-MAINTAINER dev [at] expatfinder [dot] com
+MAINTAINER expatfinder (dev@expatfinder.com)
 
-ENV NODE_VERSION=10.15.3 \
-    NPM_VERSION=6.4.1 \
-    IONIC_VERSION=1.3.1\
-    CORDOVA_VERSION=6.0.0 \
-    YARN_VERSION=1.16.0 \
-
-# Install basics
-RUN apt-get update &&  \
-    apt-get install -y git wget curl unzip ruby build-essential xvfb && \
-    yum install -y gcc-c++ make  && \
-    curl -sL https://rpm.nodesource.com/setup_10.x | -E bash -  && \
-    yum install nodejs
-    npm install -g cordova ionic@"$IONIC_VERSION" yarn@"$YARN_VERSION" && \
-    npm i -D @ionic/v1-toolkit && \
-    npm cache clear && \
-    mkdir Sources && \
-    mkdir -p /root/.cache/yarn/ && \
+RUN (curl -sL https://rpm.nodesource.com/setup_10.x | bash -) \
+  && yum clean all -y \
+  && yum update -y \
+  && yum install -y nodejs \
+  && yum autoremove -y \
+  && yum clean all -y \
+  && npm install npm --global
+  && npm install yarn --global
